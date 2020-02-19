@@ -131,7 +131,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GICamera.cpp" />
+    <ClCompile Include="GIEventSystem.cpp" />
+    <ClCompile Include="GIGameObject.cpp" />
+    <ClCompile Include="GIGraphic_API.cpp" />
+    <ClCompile Include="GIInputManager.cpp" />
+    <ClCompile Include="GIRenderManager.cpp" />
+    <ClCompile Include="GISteeringBehaviors.cpp" />
+    <ClCompile Include="GITexture.cpp" />
+    <ClCompile Include="GIWindow.cpp" />
     <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GICamera.h" />
+    <ClInclude Include="GIDefines.h" />
+    <ClInclude Include="GIEventSystem.h" />
+    <ClInclude Include="GIGameObject.h" />
+    <ClInclude Include="GIGraphic_API.h" />
+    <ClInclude Include="GIInputManager.h" />
+    <ClInclude Include="GIModule.h" />
+    <ClInclude Include="GIRenderManager.h" />
+    <ClInclude Include="GISteeringBehaviors.h" />
+    <ClInclude Include="GITexture.h" />
+    <ClInclude Include="GIWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
