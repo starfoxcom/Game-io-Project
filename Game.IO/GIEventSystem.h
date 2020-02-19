@@ -53,7 +53,7 @@ public:
     * @bug    : No known bugs.
     */
   void 
-  Update(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies);
+  Update(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies, vector<GIGameObject> & _vortex);
   /**
     * @brief  : 
     * @param  : 
@@ -77,7 +77,7 @@ public:
     * @bug    : no know bugs.
     */
   void 
-  playerRadius(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies);
+  playerRadius(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies, vector<GIGameObject> & _vortex);
   /**
     * @brief  : 
     * @param  : 

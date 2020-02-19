@@ -123,10 +123,9 @@ void GIGameObject::setCollidingState(bool _collidingState)
   m_isColliding = _collidingState;
 }
 
-sf::Vector2f & GIGameObject::getPosition()
+const sf::Vector2f & GIGameObject::getPosition()
 {
-  sf::Vector2f tmpPos = m_Mesh->getPosition();
-  return tmpPos;
+	return m_Mesh->getPosition();
 }
 
 const sf::FloatRect & GIGameObject::getGlobalBounds()

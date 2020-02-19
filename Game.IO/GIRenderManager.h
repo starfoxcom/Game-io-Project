@@ -56,6 +56,10 @@ private:
    */
   vector<GIGameObject> m_virus;
   /**
+   * @brief :
+   */
+  vector<GIGameObject> m_vortexVirus;
+  /**
    * @brief : Background object
    */
   //sf::RectangleShape * m_background;

@@ -16,9 +16,9 @@ void GIEventSystem::Init(GIGameObject & _player)
   m_radius = _player.getDescriptor().Radius;
 }
 
-void GIEventSystem::Update(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies)
+void GIEventSystem::Update(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies, vector<GIGameObject> & _vortex)
 {
-  playerRadius(_player, _food, _enemies);
+  playerRadius(_player, _food, _enemies, _vortex);
   playerVelocity(_player);
 }
 
@@ -32,7 +32,7 @@ void GIEventSystem::Destroy()
 
 }
 
-void GIEventSystem::playerRadius(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies)
+void GIEventSystem::playerRadius(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies, vector<GIGameObject> & _vortex)
 {
   for (int i = 0; i < _food.size(); i++)
   {
@@ -56,6 +56,23 @@ void GIEventSystem::playerRadius(GIGameObject & _player, vector<GIGameObject> & 
       _enemies.erase(_enemies.begin() + i);
     }
   }
+  for (int i = 0; i < _vortex.size(); i++)
+  {
+	  /*TODO: check magnitudes distances between player and vortex effect area*/
+	  sf::Vector2f distance = (_player.getPosition() - _vortex[i].getPosition());
+	  float mag = sqrtf((distance.x * distance.x) + (distance.y * distance.y));
+	  
+	  if (mag <= 350.f)
+	  {
+		  _vortex[i].setFillColor(sf::Color(rand() % 255 + 1, rand() % 255 + 1, rand() % 255 + 1, 255));
+	  }
+	  else
+	  {
+		  _vortex[i].setFillColor(sf::Color::Magenta);
+	  }
+
+  }
+
 //   for (int i = 0; i < _enemies.size(); i++)
 //   {
 //     // If player collides with the enemy collider

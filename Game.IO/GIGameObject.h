@@ -160,7 +160,7 @@ public:
     * @param  : 
     * @bug    : 
     */
-  sf::Vector2f & getPosition();
+  const sf::Vector2f & getPosition();
   /**
     * @brief  : function in charge of getting the global bounds of the shape.
     * @bug    : Does not work, needs new implementation to get the method data.
