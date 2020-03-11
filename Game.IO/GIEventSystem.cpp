@@ -88,8 +88,10 @@ void GIEventSystem::vortexRadius(GIGameObject & _player, vector<GIGameObject>& _
       float tmpVel = _player.getVelocity() * 0.8f;
       _player.Update(GISteeringBehaviors::getSingleton().Seek(vortexPos, _player, tmpVel));
       _vortex[i].setIsOnVortex(true);
-      if (_player.getInterface()->getGlobalBounds().intersects(_vortex[i].getInterface()->getGlobalBounds()) && _player.getRadius() <= 150 && _player.getRadius() >= 25) {
-        m_radius -= 20;
+      if (_player.getInterface()->getGlobalBounds().intersects(_vortex[i].getInterface()->getGlobalBounds()) && _player.getRadius() <= 150) {
+        if(_player.getRadius() >= 25) {
+          m_radius -= 20;
+        }
         _player.setRadius(m_radius);
         _player.setOrigin(sf::Vector2f(m_radius, m_radius));
         _vortex[i].setIsOnVortex(false);

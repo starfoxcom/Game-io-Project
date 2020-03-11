@@ -87,7 +87,7 @@ void GIGameObject::setRadius(float _radius)
   m_Mesh->setRadius(_radius);
 }
 
-float & GIGameObject::getRadius()
+float GIGameObject::getRadius()
 {
   float tmpRadius = m_Mesh->getRadius();
   return tmpRadius;
