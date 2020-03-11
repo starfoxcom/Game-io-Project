@@ -119,7 +119,7 @@ public:
   /**
    * @brief : 
    */
-  float & getRadius();
+  float getRadius();
   /**
     * @brief  : Function in charge of setting the position of the shape.
     * @param  : sf::Vector2f _position : Position vector of the shape.
