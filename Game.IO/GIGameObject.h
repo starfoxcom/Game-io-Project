@@ -80,6 +80,10 @@ private:
    */
   float m_velocity;
   /**
+   * @brief 
+   */
+  bool m_isOnVortex = false;
+  /**
    * Methods 
    */
 public:
@@ -159,6 +163,18 @@ public:
     * @brief  : 
     * @param  : 
     * @bug    : 
+    */
+  bool & getIsOnVortex();
+  /**
+    * @brief  :
+    * @param  :
+    * @bug    :
+    */
+  void setIsOnVortex(bool _vortexState);
+  /**
+    * @brief  :
+    * @param  :
+    * @bug    :
     */
   const sf::Vector2f & getPosition();
   /**

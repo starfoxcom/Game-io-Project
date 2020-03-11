@@ -36,6 +36,10 @@ private:
    * @brief : 
    */
   float m_radius;
+
+  int m_vortexCDTimer; /**< Vortex cool down timer*/
+
+  int m_vortexUsageTimer; /**< Vortex usage timer.*/
   /**
    * Methods 
    */
@@ -77,7 +81,14 @@ public:
     * @bug    : no know bugs.
     */
   void 
-  playerRadius(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies, vector<GIGameObject> & _vortex);
+  playerRadius(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies);
+
+  /**
+   * @brief	 :
+   * @param	 :
+   */
+  void
+  vortexRadius(GIGameObject & _player, vector<GIGameObject> & _vortex);
   /**
     * @brief  : 
     * @param  : 

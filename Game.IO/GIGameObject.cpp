@@ -123,6 +123,16 @@ void GIGameObject::setCollidingState(bool _collidingState)
   m_isColliding = _collidingState;
 }
 
+bool & GIGameObject::getIsOnVortex()
+{
+  return m_isOnVortex;
+}
+
+void GIGameObject::setIsOnVortex(bool _vortexState)
+{
+  m_isOnVortex = _vortexState;
+}
+
 const sf::Vector2f & GIGameObject::getPosition()
 {
 	return m_Mesh->getPosition();

@@ -1,11 +1,9 @@
 #include "GIRenderManager.h"
 
 
-
 GIRenderManager::GIRenderManager()
 {
 }
-
 
 GIRenderManager::~GIRenderManager()
 {
@@ -99,7 +97,7 @@ void GIRenderManager::Init()
   for (int i = 0; i < m_food.size(); i++)
   {
     m_food[i].Init(FoodDesc);
-    //m_food[i].setPosition(sf::Vector2f(rand() % WindowDesc.Width + 1, rand() % WindowDesc.Height + 1));
+    m_food[i].setPosition(sf::Vector2f(rand() % WindowDesc.Width + 1, rand() % WindowDesc.Height + 1));
     m_food[i].setPosition(sf::Vector2f(rand() % (WindowDesc.Width * 4) + 1, rand() % (WindowDesc.Height * 4) + 1));
     m_food[i].setFillColor(sf::Color(rand() % 255 + 1, rand() % 255 + 1, rand() % 255 + 1, 255));
   }
@@ -107,7 +105,7 @@ void GIRenderManager::Init()
   for (int i = 0; i < m_virus.size(); i++)
   {
     m_virus[i].Init(VirusDesc);
-    //m_virus[i].setPosition(sf::Vector2f(rand() % WindowDesc.Width + 1, rand() % WindowDesc.Height + 1));
+    m_virus[i].setPosition(sf::Vector2f(rand() % WindowDesc.Width + 1, rand() % WindowDesc.Height + 1));
     m_virus[i].setPosition(sf::Vector2f(rand() % (WindowDesc.Width * 4) + 1, rand() % (WindowDesc.Height * 4) + 1));
   }
 
@@ -115,7 +113,7 @@ void GIRenderManager::Init()
   for (int i = 0; i < m_vortexVirus.size(); i++)
   {
 	  m_vortexVirus[i].Init(VortexDesc);
-	  //m_virus[i].setPosition(sf::Vector2f(rand() % WindowDesc.Width + 1, rand() % WindowDesc.Height + 1));
+	  m_virus[i].setPosition(sf::Vector2f(rand() % WindowDesc.Width + 1, rand() % WindowDesc.Height + 1));
 	  m_vortexVirus[i].setPosition(sf::Vector2f(rand() % (WindowDesc.Width * 4) + 1, rand() % (WindowDesc.Height * 4) + 1));
   }
 
