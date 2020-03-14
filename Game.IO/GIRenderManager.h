@@ -19,6 +19,7 @@
 #include "GIGraphic_API.h"
 #include "GISteeringBehaviors.h"
 #include "GIInputManager.h"
+#include "GIGui.h"
 #pragma once
 
 /**
@@ -55,6 +56,12 @@ private:
    * @brief : 
    */
   vector<GIGameObject> m_virus;
+
+  /**
+  * @brief : takes care drawing the gui U,I one screen.
+  * @bug : no known bugs 
+  */
+  GIGui m_gui;
   /**
    * @brief : Background object
    */

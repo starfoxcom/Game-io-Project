@@ -135,6 +135,9 @@
     <ClCompile Include="GIEventSystem.cpp" />
     <ClCompile Include="GIGameObject.cpp" />
     <ClCompile Include="GIGraphic_API.cpp" />
+    <ClCompile Include="GIGui.cpp" />
+    <ClCompile Include="GIGuiImage.cpp" />
+    <ClCompile Include="GIGuiRect.cpp" />
     <ClCompile Include="GIInputManager.cpp" />
     <ClCompile Include="GIRenderManager.cpp" />
     <ClCompile Include="GISteeringBehaviors.cpp" />
@@ -148,6 +151,9 @@
     <ClInclude Include="GIEventSystem.h" />
     <ClInclude Include="GIGameObject.h" />
     <ClInclude Include="GIGraphic_API.h" />
+    <ClInclude Include="GIGui.h" />
+    <ClInclude Include="GIGuiImage.h" />
+    <ClInclude Include="GIGuiRect.h" />
     <ClInclude Include="GIInputManager.h" />
     <ClInclude Include="GIModule.h" />
     <ClInclude Include="GIRenderManager.h" />

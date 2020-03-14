@@ -57,6 +57,11 @@ struct GIGuiRectDescriptor
   */
   sf::Color rectColor = sf::Color::White;
 
+  /**
+  * @brief : used to find a specific GuiRect
+  */
+  std::size_t id = 0u;
+
   unsigned int CustomSizeForText = 70u;
 
   bool isTextCustomSize = false;

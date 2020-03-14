@@ -32,10 +32,16 @@ struct GIGuiImageDescriptor
   * @brief : some color to be applied to the current texture.
   */
   sf::Color maskColor = sf::Color(255, 255, 255, 255);
+
+  /**
+  * @brief : used to identify which GuiImage im using
+  */
+  std::size_t id = 0u;
 };
 
   /**
-  * @brief : contains 
+  * @brief :contains a texture and controls how and where
+  * it's presented on screen.
   */
 class GIGuiImage
 {
@@ -93,6 +99,10 @@ public:
   // TODO : replace with std::shared_ptr
   std::unique_ptr<sf::Texture> m_texture;
 
+  /**
+  * @brief : tell the class how to present the image 
+  * and where.
+  */
   GIGuiImageDescriptor m_descriptor;
 };
 

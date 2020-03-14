@@ -104,6 +104,8 @@ GIGui::placeText(const char* text,
     errorMessageWithSolution("gui has no font loaded ", " please use the function 'loadFront' ");
   }
 }
+
+
 void
 GIGui::placeColorText(const char* text,
                       sf::RenderWindow& window,
@@ -206,6 +208,8 @@ void
 GIGui::createGuiRect(const GIGuiRectDescriptor& descriptor)
 {
   m_guiRects.push_back(descriptor);
+  auto const index = m_guiRects.size() - 1;
+  m_guiRects[index].m_descriptor.id = m_guiRectIDCount++;
 }
 
 bool
@@ -217,6 +221,8 @@ GIGui::createGuiImage(const GIGuiImageDescriptor& descriptor,
   if( isSuccessful )
   {
     m_guiImages.emplace_back(std::move(newImage));
+    auto const index = m_guiImages.size() - 1;
+    m_guiImages[index].m_descriptor.id = m_guiImageIDCount++;
     return isSuccessful;
   }
   return isSuccessful;
@@ -246,7 +252,6 @@ GIGui::DrawGuiImages(sf::RenderWindow& window)
 void 
 GIGui::UpdateGuiRects(sf::RenderWindow& window)
 {
-
   for( auto& guiRect : m_guiRects )
   {
     guiRect.update(&window);
@@ -260,6 +265,13 @@ GIGui::UpdateGuiImages(sf::RenderWindow& window)
   {
     image.update(window);
   }
+}
+
+void 
+GIGui::update(sf::RenderWindow& window)
+{
+  this->UpdateGuiRects(window);
+  this->UpdateGuiImages(window);
 }
 
 void
@@ -292,6 +304,31 @@ GIGui::moveAndSetSprite(sf::Sprite& sprite,
 {
   sprite.setPosition(position);
 
+}
+
+GIGuiRect* 
+GIGui::getGuiRecPtrByID(std::size_t id)
+{
+
+  for( GIGuiRect& result : m_guiRects )
+  {
+    if(result.m_descriptor.id == id)
+     return &result; 
+  }
+
+  return nullptr;
+}
+
+GIGuiImage*
+GIGui::getGuiImagePtrByID(std::size_t id)
+{
+
+  for( GIGuiImage& result : m_guiImages)
+  {
+    if(result.m_descriptor.id == id)
+     return &result; 
+  }
+  return nullptr;
 }
 
 

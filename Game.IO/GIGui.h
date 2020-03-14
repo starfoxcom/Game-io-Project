@@ -32,8 +32,8 @@ struct EventAndID
   EventAndID(const EventAndID& other) = default;
   EventAndID(EventAndID&& other) = default;
 
-  EventAndID(std::function<int(bool)> func_ptr, std::size_t newID)
-    :m_event(func_ptr),
+  EventAndID(std::function<int(bool)> lambdaOrFuncPtr, std::size_t newID)
+    :m_event(lambdaOrFuncPtr),
     m_id(newID)
   {}
 };
@@ -59,7 +59,7 @@ public:
 
 /**
 * @brief : adds a event(aka function) to the gui
-* @param[in] func_ptr : a pointer to a function or lambda
+* @param[in] lambdaOrFuncPtr : a pointer to a function or lambda
 */
   void 
   addEvent(std::function<int(bool)> functionOrLambda);
@@ -204,6 +204,13 @@ public:
   void 
   UpdateGuiImages(sf::RenderWindow& window);
 
+  /**
+  * @brief : call each update function individually.
+  * @bug : no known bugs.
+  */
+  void 
+  update(sf::RenderWindow& window);
+
 private:
 /**
 * @brief : takes care of moving the position of the text
@@ -227,18 +234,39 @@ private:
   moveAndSetSprite(sf::Sprite& sprite,
                    const sf::Vector2f& position);
 
-public:
+  /**
+  * @return : a pointer to a specific instance of a GuiRect or 
+  * nullptr if no instance is found.
+  * @bug : no known bugs.
+  */
+  GIGuiRect*
+  getGuiRecPtrByID(std::size_t id);
 
-  std::vector<GIGuiRect> m_guiRects;
+
+  /**
+  * @return : a pointer to a specific instance of a GuiImage or 
+  * nullptr if no instance is found.
+  * @bug : no known bugs.
+  */
+  GIGuiImage*
+  getGuiImagePtrByID(std::size_t id);
+public:
+  /**
+  * @brief : contains all the GuiRects instances and it's 
+  * a std::deque so it's safe to have a pointer to a individual 
+  * instance of the GIGuiRect
+  */
+  std::deque<GIGuiRect> m_guiRects;
 
   /**
   * @brief : contains all the GuiImages instances and it's 
-  * a std::deque so it's safe to have a pointer to a individual
+  * a std::deque so it's safe to have a pointer to a individual 
   * instance of the GuiImage
   */
   std::deque<GIGuiImage> m_guiImages;
 private:
   std::vector<EventAndID> m_events;
+
 /**
 * @brief : the font of the text
 */
@@ -255,9 +283,14 @@ private:
   sf::String m_String;
 
   /**
-  * @brief : a pointer to a window, where the gui is being drawn to
+  * @brief : keep track of latest available id for a guiRect.
   */
-  sf::RenderWindow * m_window = nullptr;
+  std::size_t m_guiRectIDCount = 0u;
+
+  /**
+  * @brief : keep track of latest available id for a guiImage.
+  */
+  std::size_t m_guiImageIDCount = 0u;
 
   /**
   * @brief : used to know if we have a font loaded

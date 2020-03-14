@@ -60,6 +60,30 @@ void GIRenderManager::Init()
   CameraDesc.Position = sf::Vector2f(0, 0);
 
   m_Camera.Init(CameraDesc);
+
+  if( !m_gui.init("resources/SatellaRegular-ZVVaz.ttf") )
+  {
+    std::cerr << "failed to load font ";
+  }
+
+  {
+    GIGuiRectDescriptor  CenterWindowDesc;
+    CenterWindowDesc.rectColor = sf::Color::Red;
+    CenterWindowDesc.textColor = sf::Color::Black;
+    float const tempWidth = CenterWindowDesc.widthAndHeight.x = 250;
+    float const tempHeight = CenterWindowDesc.widthAndHeight.y = 250;
+    CenterWindowDesc.InRectPlacementPercentage.x = 0.05f;
+    CenterWindowDesc.InRectPlacementPercentage.y = 0.09f;
+    CenterWindowDesc.screenPlacement = sf::Vector2i((WindowDesc.Width * .5f) - tempWidth / 2,
+      (WindowDesc.Height * .25f) - tempHeight / 2);
+    CenterWindowDesc.text = "Game.IO";
+    CenterWindowDesc.CustomSizeForText = 65u;
+    CenterWindowDesc.isTextCustomSize = true;
+    CenterWindowDesc.id = 0;
+    m_gui.createGuiRect(CenterWindowDesc);
+  }
+
+
   for (int i = 0; i < 850; i++)
   {
     GIGameObject tmpFood;
@@ -120,6 +144,9 @@ void GIRenderManager::Update()
   m_Camera.Update();
   // Update Event system
   m_EventSystem.Update(m_Player, m_food, m_virus);
+
+  // update the position of each element of the Gui.
+  m_gui.update(*m_window.getInterface());
 }
 
 void GIRenderManager::Render()
@@ -141,6 +168,8 @@ void GIRenderManager::Render()
   }
 
   m_Camera.Render(m_window);
+
+  m_gui.DrawGuiRects(*m_window.getInterface());
 
   GIGraphic_API::getSingleton().Present(m_window);
 }
