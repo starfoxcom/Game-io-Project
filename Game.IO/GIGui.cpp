@@ -250,6 +250,13 @@ GIGui::DrawGuiImages(sf::RenderWindow& window)
 }
 
 void 
+GIGui::Draw(sf::RenderWindow& window)
+{
+  this->DrawGuiRects(window);
+  this->DrawGuiImages(window);
+}
+
+void 
 GIGui::UpdateGuiRects(sf::RenderWindow& window)
 {
   for( auto& guiRect : m_guiRects )
@@ -272,6 +279,31 @@ GIGui::update(sf::RenderWindow& window)
 {
   this->UpdateGuiRects(window);
   this->UpdateGuiImages(window);
+}
+
+GIGuiRect* 
+GIGui::getGuiRecPtrByID(std::size_t id)
+{
+
+  for( GIGuiRect& result : m_guiRects )
+  {
+    if(result.m_descriptor.id == id)
+     return &result; 
+  }
+
+  return nullptr;
+}
+
+GIGuiImage*
+GIGui::getGuiImagePtrByID(std::size_t id)
+{
+
+  for( GIGuiImage& result : m_guiImages)
+  {
+    if(result.m_descriptor.id == id)
+     return &result; 
+  }
+  return nullptr;
 }
 
 void
@@ -305,31 +337,3 @@ GIGui::moveAndSetSprite(sf::Sprite& sprite,
   sprite.setPosition(position);
 
 }
-
-GIGuiRect* 
-GIGui::getGuiRecPtrByID(std::size_t id)
-{
-
-  for( GIGuiRect& result : m_guiRects )
-  {
-    if(result.m_descriptor.id == id)
-     return &result; 
-  }
-
-  return nullptr;
-}
-
-GIGuiImage*
-GIGui::getGuiImagePtrByID(std::size_t id)
-{
-
-  for( GIGuiImage& result : m_guiImages)
-  {
-    if(result.m_descriptor.id == id)
-     return &result; 
-  }
-  return nullptr;
-}
-
-
-

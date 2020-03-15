@@ -5,9 +5,11 @@
 #include "SFML/Graphics.hpp"
 
 class GIGui;
+class GIGuiRect;
 
 struct GIGuiImageDescriptor
 {
+
   /**
   * @brief :where the image will be on the screen.
   */
@@ -21,22 +23,32 @@ struct GIGuiImageDescriptor
   /**
   * @brief :the size of the image.
   */
-  sf::Vector2u imageSize = sf::Vector2u(100, 100);
+  sf::Vector2u imageSize = sf::Vector2u(100u, 100u);
 
   /**
   * @brief : keeps track of what the last size of the image was.
   */
-  sf::Vector2u prevImageSize = sf::Vector2u(100, 100);
+  sf::Vector2u prevImageSize = sf::Vector2u(100u, 100u);
 
   /**
-  * @brief : some color to be applied to the current texture.
+  * @brief : use to attach a image to a GuiRect (AKA keep it in the same area).
   */
-  sf::Color maskColor = sf::Color(255, 255, 255, 255);
+  GIGuiRect* ptr_attached = nullptr;//attached
+
+  /**
+  * @brief : used to control the offset when attach to a GuiRect
+  */
+  sf::Vector2f offSetAttached = sf::Vector2f(0.0f, 0.0f);
 
   /**
   * @brief : used to identify which GuiImage im using
   */
   std::size_t id = 0u;
+
+  /**
+  * @brief : some color to be applied to the current texture.
+  */
+  sf::Color maskColor = sf::Color(255, 255, 255, 255);
 };
 
   /**

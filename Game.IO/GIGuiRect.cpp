@@ -6,7 +6,7 @@ GIGuiRect::GIGuiRect(const GIGuiRectDescriptor& decriptor)
 {
   m_descriptor = decriptor;
   m_shapeOfRect.setSize(m_descriptor.widthAndHeight);
-  m_shapeOfRect.setOrigin(m_descriptor.widthAndHeight *.5f);
+  m_shapeOfRect.setOrigin(m_descriptor.widthAndHeight * .5f);
   m_shapeOfRect.setFillColor(m_descriptor.rectColor);
 }
 
@@ -25,7 +25,22 @@ GIGuiRect::getScreenPosition(sf::RenderWindow* window) const
   return  result;
 }
 
-sf::Vector2f 
+sf::Vector2i
+GIGuiRect::getPositionInScreen(sf::RenderWindow* window,
+                               float const offSetInX,
+                               float const offSetInY) const
+{
+  sf::Vector2f const worldPostion = getScreenPosition(window);
+
+  sf::Vector2f const sizeOfRect = m_descriptor.widthAndHeight;
+
+  sf::Vector2f const OffSet(sizeOfRect.x * offSetInX, sizeOfRect.y * offSetInY);
+
+  sf::Vector2i const result = window->mapCoordsToPixel(worldPostion + OffSet);
+  return  result;
+}
+
+sf::Vector2f
 GIGuiRect::getPositionInRect(sf::RenderWindow* window,
                              float offSetPercentageInX,
                              float offSetPercentageInY) const
@@ -41,22 +56,22 @@ GIGuiRect::getPositionInRect(sf::RenderWindow* window,
   return  result + offSetInRect;
 }
 
-sf::Vector2f 
+sf::Vector2f
 GIGuiRect::getSize() const
 {
   return m_descriptor.widthAndHeight;
 }
 
-void 
+void
 GIGuiRect::init(sf::RenderWindow* window,
                 const GIGuiRectDescriptor& descriptor)
 {
-   this->m_descriptor = descriptor;
-   update(window);
+  this->m_descriptor = descriptor;
+  update(window);
 }
 
 
-void 
+void
 GIGuiRect::update(sf::RenderWindow* window)
 {
   m_shapeOfRect.setFillColor(m_descriptor.textColor);

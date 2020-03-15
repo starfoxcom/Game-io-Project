@@ -103,6 +103,21 @@ public:
   getScreenPosition(sf::RenderWindow* window) const;
 
   /**
+  * @returns : where the is located in screen coordinates.
+  * @param[in] offSetInX :a percentage 1.0f is the right-most side, 0.0f is
+  *  the left-most side.
+  *
+  * @param[in] offSetInY :a percentage 1.0f is the bottom-most side, 0.0f is
+  *  the top-most side.
+  *
+  * @bug : no known bugs
+  */
+  sf::Vector2i
+  getPositionInScreen(sf::RenderWindow* window,
+                      float const offSetInX = 0.0f,
+                      float const offSetInY = 0.0f)const;
+
+  /**
   * @returns :a position inside the rectangle in world space
   * @bug : no known bugs.
   */
@@ -151,8 +166,6 @@ public:
   */
   sf::Vector2f
   caculateOffSet() const;
-
-
 
 private:
   /**

@@ -189,6 +189,13 @@ public:
   DrawGuiImages(sf::RenderWindow& window );
 
   /**
+  * @brief : draws every element of the gui.
+  * @bug : no known bugs.
+  */
+  void
+  Draw(sf::RenderWindow& window);
+
+  /**
   * @brief : updates them so that you can change the rect during run-time.
   * @bug : no known bugs.
   */
@@ -210,6 +217,23 @@ public:
   */
   void 
   update(sf::RenderWindow& window);
+
+  /**
+  * @return : a pointer to a specific instance of a GuiRect or 
+  * nullptr if no instance is found.
+  * @bug : no known bugs.
+  */
+  GIGuiRect*
+  getGuiRecPtrByID(std::size_t id);
+
+
+  /**
+  * @return : a pointer to a specific instance of a GuiImage or 
+  * nullptr if no instance is found.
+  * @bug : no known bugs.
+  */
+  GIGuiImage*
+  getGuiImagePtrByID(std::size_t id);
 
 private:
 /**
@@ -233,23 +257,6 @@ private:
   void
   moveAndSetSprite(sf::Sprite& sprite,
                    const sf::Vector2f& position);
-
-  /**
-  * @return : a pointer to a specific instance of a GuiRect or 
-  * nullptr if no instance is found.
-  * @bug : no known bugs.
-  */
-  GIGuiRect*
-  getGuiRecPtrByID(std::size_t id);
-
-
-  /**
-  * @return : a pointer to a specific instance of a GuiImage or 
-  * nullptr if no instance is found.
-  * @bug : no known bugs.
-  */
-  GIGuiImage*
-  getGuiImagePtrByID(std::size_t id);
 public:
   /**
   * @brief : contains all the GuiRects instances and it's 

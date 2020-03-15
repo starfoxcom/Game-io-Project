@@ -56,7 +56,17 @@ GIGuiImage::update(sf::RenderWindow& window)
     this->changeImageSize(m_descriptor.imageSize);
   }
 
-  m_descriptor.worldPosition = window.mapPixelToCoords(m_descriptor.screenPlacement);
+  if( m_descriptor.ptr_attached == nullptr )
+  {
+    m_descriptor.worldPosition = window.mapPixelToCoords(m_descriptor.screenPlacement);
+  }
+  else
+  {
+    GIGuiRect const* const ptr_rect = m_descriptor.ptr_attached;
+    m_descriptor.worldPosition = ptr_rect->getPositionInRect(&window,
+                                                             m_descriptor.offSetAttached.x,
+                                                             m_descriptor.offSetAttached.y);
+  }
 
   m_sprite.setColor(m_descriptor.maskColor);
 }
@@ -93,8 +103,11 @@ GIGuiImage::Impl_changeImageSize(const sf::Vector2u& newSize)
 
   m_sprite.setScale(newScaleInX,
                     newScaleInY);
+                    
+  sf::FloatRect const LocalBounds = m_sprite.getLocalBounds();
 
-  m_sprite.setOrigin((ImageRectangle.width * reciprocalWidth) * .5f,
-    (ImageRectangle.height * reciprocalHeight) * .5f);
+
+  m_sprite.setOrigin(LocalBounds.width  * .5f,
+                     LocalBounds.height * .5f);
 
 }
