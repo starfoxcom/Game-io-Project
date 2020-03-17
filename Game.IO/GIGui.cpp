@@ -206,7 +206,7 @@ GIGui::getIfFrontIsLoaded() const
   return m_hasFontLoaded;
 }
 
-void 
+void
 GIGui::createGuiRect(const GIGuiRectDescriptor& descriptor)
 {
   m_guiRects.push_back(descriptor);
@@ -231,16 +231,16 @@ GIGui::createGuiImage(const GIGuiImageDescriptor& descriptor,
 
 }
 
-void 
+void
 GIGui::DrawGuiRects(sf::RenderWindow& window)
 {
   for( auto& element : m_guiRects )
   {
-    element.draw(*this,&window);
+    element.draw(*this, &window);
   }
 }
 
-void 
+void
 GIGui::DrawGuiImages(sf::RenderWindow& window)
 {
 
@@ -251,14 +251,14 @@ GIGui::DrawGuiImages(sf::RenderWindow& window)
 
 }
 
-void 
+void
 GIGui::Draw(sf::RenderWindow& window)
 {
   this->DrawGuiRects(window);
   this->DrawGuiImages(window);
 }
 
-void 
+void
 GIGui::UpdateGuiRects(sf::RenderWindow& window)
 {
   for( auto& guiRect : m_guiRects )
@@ -267,7 +267,7 @@ GIGui::UpdateGuiRects(sf::RenderWindow& window)
   }
 }
 
-void 
+void
 GIGui::UpdateGuiImages(sf::RenderWindow& window)
 {
   for( GIGuiImage& image : m_guiImages )
@@ -276,21 +276,21 @@ GIGui::UpdateGuiImages(sf::RenderWindow& window)
   }
 }
 
-void 
+void
 GIGui::update(sf::RenderWindow& window)
 {
   this->UpdateGuiRects(window);
   this->UpdateGuiImages(window);
 }
 
-GIGuiRect* 
+GIGuiRect*
 GIGui::getGuiRecPtrByID(std::size_t id)
 {
 
   for( GIGuiRect& result : m_guiRects )
   {
-    if(result.m_descriptor.id == id)
-     return &result; 
+    if( result.m_descriptor.id == id )
+      return &result;
   }
 
   return nullptr;
@@ -300,10 +300,10 @@ GIGuiImage*
 GIGui::getGuiImagePtrByID(std::size_t id)
 {
 
-  for( GIGuiImage& result : m_guiImages)
+  for( GIGuiImage& result : m_guiImages )
   {
-    if(result.m_descriptor.id == id)
-     return &result; 
+    if( result.m_descriptor.id == id )
+      return &result;
   }
   return nullptr;
 }
@@ -332,7 +332,7 @@ GIGui::moveAndSetRect(sf::RectangleShape& rectShape,
 
 }
 
-void 
+void
 GIGui::moveAndSetSprite(sf::Sprite& sprite,
                         const sf::Vector2f& position)
 {
