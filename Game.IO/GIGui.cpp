@@ -40,26 +40,28 @@ GIGui::executeEvent(bool conditions, std::size_t chosenEvent)
   return -1337;
 }
 
+
+
 bool
 GIGui::addBottonToWindow(sf::RenderWindow& window,
-                         sf::Vector2i mousePosition,
-                         sf::Vector2f ButtonPosition,
+                         sf::Vector2f& ButtonPosition,
                          sf::Vector2f Size)
-
 {
+  bool result = false;
+
   sf::Rect<float> logicRect(ButtonPosition, Size);
   sf::RectangleShape visualRect(ButtonPosition);
-  bool result = false;
 
   visualRect.setSize(Size);
   visualRect.setFillColor(sf::Color::Green);
   visualRect.setPosition(ButtonPosition);
 
+  sf::Vector2i const mousePosition = sf::Mouse::getPosition(window);
+  sf::Vector2f const worldPosition = window.mapPixelToCoords(mousePosition);
   //
-  if( logicRect.contains(static_cast<sf::Vector2f>(mousePosition))
-     && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) )
+  if( logicRect.contains(worldPosition) &&
+     sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) )
   {
-    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
     visualRect.setFillColor(sf::Color::Red);
     result = true;
   }

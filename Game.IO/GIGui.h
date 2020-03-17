@@ -71,15 +71,14 @@ public:
   executeEvent(bool conditions,std::size_t chosenEvent);
 
 /**
-* @returns  if the bottom was clicked
-* @param[in] ButtonPosition : where the button in going to be
+* @returns : if the bottom was clicked.
+* @param[in] ButtonPosition : where the button in going to be.
+* @param[in] Size : The size of the button.
 */
   bool
   addBottonToWindow(sf::RenderWindow& window,
-                    sf::Vector2i mousePosition,
-                    sf::Vector2f ButtonPosition,
+                    sf::Vector2f& const ButtonPosition,
                     sf::Vector2f Size = sf::Vector2f(100.0f, 100.0f));
-
 /**
 * @brief : loads a font for the gui to use.
 * @bug  : no known bugs

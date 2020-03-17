@@ -95,7 +95,7 @@ void GIRenderManager::Init()
   }
 
   {
-    GIGuiRect * const ptr_rect = m_gui.getGuiRecPtrByID(1u);
+    GIGuiRect* const ptr_rect = m_gui.getGuiRecPtrByID(1u);
     GIGuiImageDescriptor imageDescritor;
     imageDescritor.ptr_attached = ptr_rect;
     imageDescritor.offSetAttached = sf::Vector2f(0.3f, 0.3f);
@@ -148,6 +148,7 @@ void GIRenderManager::Update()
   {
     if( event.type == sf::Event::Closed )
       m_window.getInterface()->close();
+
   }
 
   sf::Vector2f worldPos = GIInputManager::getSingleton().getWorldPosition(m_window, m_Camera);
@@ -189,6 +190,27 @@ void GIRenderManager::Render()
 
  // m_gui.DrawGuiRects(*m_window.getInterface());
   m_gui.Draw(*m_window.getInterface());
+
+  static bool isClicked = false;
+  if( !isClicked )
+  {
+    sf::RenderWindow* ptr_window = m_window.getInterface();
+    GIGuiRect* ptr_rect = m_gui.getGuiRecPtrByID(0);
+    GIGuiRectDescriptor desc = ptr_rect->m_descriptor;
+
+    sf::Vector2i screenPos = desc.screenPlacement;
+
+    screenPos.x += (desc.widthAndHeight.x * .3f);
+    screenPos.y += (desc.widthAndHeight.y * .6f);
+
+    sf::Vector2i const mouseScreenPos = sf::Mouse::getPosition(*ptr_window);
+    sf::Vector2f screenWorldPos = ptr_window->mapPixelToCoords(screenPos);
+    sf::Vector2f mouseWorldPos = ptr_window->mapPixelToCoords(mouseScreenPos);
+
+    isClicked = m_gui.addBottonToWindow(*ptr_window,
+                                        screenWorldPos);
+  }
+
 
   GIGraphic_API::getSingleton().Present(m_window);
 }
