@@ -87,7 +87,7 @@ void GIGameObject::setRadius(float _radius)
   m_Mesh->setRadius(_radius);
 }
 
-float & GIGameObject::getRadius()
+float GIGameObject::getRadius()
 {
   float tmpRadius = m_Mesh->getRadius();
   return tmpRadius;
@@ -123,10 +123,19 @@ void GIGameObject::setCollidingState(bool _collidingState)
   m_isColliding = _collidingState;
 }
 
-sf::Vector2f & GIGameObject::getPosition()
+bool & GIGameObject::getIsOnVortex()
 {
-  sf::Vector2f tmpPos = m_Mesh->getPosition();
-  return tmpPos;
+  return m_isOnVortex;
+}
+
+void GIGameObject::setIsOnVortex(bool _vortexState)
+{
+  m_isOnVortex = _vortexState;
+}
+
+const sf::Vector2f & GIGameObject::getPosition()
+{
+	return m_Mesh->getPosition();
 }
 
 const sf::FloatRect & GIGameObject::getGlobalBounds()

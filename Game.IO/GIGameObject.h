@@ -80,6 +80,10 @@ private:
    */
   float m_velocity;
   /**
+   * @brief 
+   */
+  bool m_isOnVortex = false;
+  /**
    * Methods 
    */
 public:
@@ -119,7 +123,7 @@ public:
   /**
    * @brief : 
    */
-  float & getRadius();
+  float getRadius();
   /**
     * @brief  : Function in charge of setting the position of the shape.
     * @param  : sf::Vector2f _position : Position vector of the shape.
@@ -160,7 +164,19 @@ public:
     * @param  : 
     * @bug    : 
     */
-  sf::Vector2f & getPosition();
+  bool & getIsOnVortex();
+  /**
+    * @brief  :
+    * @param  :
+    * @bug    :
+    */
+  void setIsOnVortex(bool _vortexState);
+  /**
+    * @brief  :
+    * @param  :
+    * @bug    :
+    */
+  const sf::Vector2f & getPosition();
   /**
     * @brief  : function in charge of getting the global bounds of the shape.
     * @bug    : Does not work, needs new implementation to get the method data.
