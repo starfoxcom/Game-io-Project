@@ -47,6 +47,14 @@ private:
 
   GIGameObject m_Player;
   GIGameObject m_son;
+
+   /**
+   * @brief : Clon game object vector
+    * @Author : Ramses Guerrero A.
+   */
+  vector<GIGameObject> m_ItemClon;
+  bool m_IsItemClon;
+  GIInputManager m_InputManager;
   /**
    * @brief : Food game object vector
    */

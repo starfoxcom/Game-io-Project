@@ -18,6 +18,8 @@
  */
 class GIWindow;
 class GICamera;
+class GIEventSystem;
+class GIGameObject;
 /**
  * @brief : 
  */
@@ -87,5 +89,8 @@ public:
     */
   sf::Vector2f & 
   getWorldPosition(GIWindow & _window, GICamera & _camera);
+
+  void
+  GetInput(sf::Event& _event, GIEventSystem& _eventSystem, GIGameObject& _player);
 };
 

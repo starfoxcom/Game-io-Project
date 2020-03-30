@@ -41,6 +41,12 @@ void GIRenderManager::Init()
   FoodDesc.OutlineColor = sf::Color::Transparent;
   FoodDesc.TextureName = nullptr;
 
+  GIGameObjectDesc ClonDesc; //*@Author :Ramses
+  ClonDesc.Radius = 15.0f;
+  ClonDesc.OutlineSize = 4;
+  ClonDesc.OutlineColor = sf::Color::Transparent;
+  ClonDesc.TextureName = "Clon.png";
+
   GIGameObjectDesc VirusDesc;
   VirusDesc.Radius = 50.0f;
   VirusDesc.OutlineSize = 0;
@@ -69,6 +75,13 @@ void GIRenderManager::Init()
   CameraDesc.Position = sf::Vector2f(0, 0);
 
   m_Camera.Init(CameraDesc);
+
+  for (int i = 0; i < 40; i++) {//*@Author :Ramses, clon
+
+      GIGameObject tmpClon;
+      m_ItemClon.push_back(tmpClon);
+  }
+
   for (int i = 0; i < 850; i++)
   {
     GIGameObject tmpFood;
@@ -93,6 +106,11 @@ void GIRenderManager::Init()
   m_son.Init(SonDesc);
   m_son.setPosition(sf::Vector2f(1000, 2000));
 
+  for (int i = 0; i < m_ItemClon.size(); i++) { //*@Author :Ramses
+
+      m_ItemClon[i].Init(ClonDesc);
+      m_ItemClon[i].setPosition(sf::Vector2f(rand() % (WindowDesc.Width * 4) + 1, rand() % (WindowDesc.Height * 4) + 1));
+  }
 
   for (int i = 0; i < m_food.size(); i++)
   {
@@ -130,6 +148,7 @@ void GIRenderManager::Update()
   {
     if (event.type == sf::Event::Closed)
       m_window.getInterface()->close();
+       m_InputManager.GetInput(event, m_EventSystem, m_Player);
   }
 
   sf::Vector2f worldPos = GIInputManager::getSingleton().getWorldPosition(m_window, m_Camera);
@@ -143,7 +162,7 @@ void GIRenderManager::Update()
   // Update camera 
   m_Camera.Update();
   // Update Event system
-  m_EventSystem.Update(m_Player, m_food, m_virus, m_vortexVirus);
+  m_EventSystem.Update(m_Player, m_food, m_virus, m_vortexVirus, m_ItemClon);
 }
 
 void GIRenderManager::Render()
@@ -153,6 +172,13 @@ void GIRenderManager::Render()
   m_Player.Render(m_window);
 
   m_son.Render(m_window);
+
+  m_EventSystem.Render(m_window);
+
+  for (int i = 0; i < m_ItemClon.size(); i++) { //*@Author :Ramses
+
+      m_ItemClon[i].Render(m_window);
+  }
 
   for (int i = 0; i < m_food.size(); i++)
   {

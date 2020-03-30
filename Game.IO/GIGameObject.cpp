@@ -162,3 +162,13 @@ sf::CircleShape *& GIGameObject::getInterface()
 {
   return m_Mesh;
 }
+
+void GIGameObject::setIsItemClon(bool _itemClon){
+
+    m_isItemClon = _itemClon;
+}
+
+bool& GIGameObject::getIsItemClon(){
+
+    return m_isItemClon;
+}

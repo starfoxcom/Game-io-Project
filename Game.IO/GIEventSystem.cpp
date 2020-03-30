@@ -18,16 +18,39 @@ void GIEventSystem::Init(GIGameObject & _player)
   m_vortexUsageTimer = 0;
 }
 
-void GIEventSystem::Update(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies, vector<GIGameObject> & _vortex)
+void GIEventSystem::Update(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies, vector<GIGameObject> & _vortex, vector<GIGameObject> & _ItemClon)
 {
-  playerRadius(_player, _food, _enemies);
+  playerRadius(_player, _food, _enemies, _ItemClon);
   vortexRadius(_player, _vortex);
   playerVelocity(_player);
+
+  //Checamos si el jugador hizo click derecho y aparte si tiene el item de clon
+  if (m_IsInstanciated) {
+
+      //Mandamos a crear una instancia del player de ese momento
+      Instance(_player);
+      for (int i = 0; i < m_Instances.size(); i++)
+      {
+          m_Instances[i].Init(_player.getDescriptor());
+      }
+      
+  }
+  
+
+  //Ciclo para poder asignar los valores al clon
+  for (int i = 0; i < m_Instances.size(); i++) {
+
+      m_Instances[i].setVelocity(0);    //Velocidad del clon
+      m_Instances[i].setPosition(m_tempInverse); //Direcci�n
+  }
 }
 
-void GIEventSystem::Render()
+void GIEventSystem::Render(GIWindow& _window)
 {
+ for (int i = 0; i < m_Instances.size(); i++) {
 
+        m_Instances[i].Render(_window);
+    }
 }
 
 void GIEventSystem::Destroy()
@@ -35,8 +58,20 @@ void GIEventSystem::Destroy()
 
 }
 
-void GIEventSystem::playerRadius(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies)
+void GIEventSystem::playerRadius(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies, vector<GIGameObject> & _ItemClon)
 {
+   for (int i = 0; i < _ItemClon.size(); i++) //*@Author :Ramses
+  {
+      if (_player.getInterface()->getGlobalBounds().intersects(_ItemClon[i].getInterface()->getGlobalBounds()) && _ItemClon[i].getIsColliding() == false)
+      {
+          m_radius += 0.5f;
+          _player.setRadius(m_radius);
+          _player.setOrigin(sf::Vector2f(m_radius, m_radius));
+          _ItemClon[i].setCollidingState(true);
+          _player.setIsItemClon(true);
+          _ItemClon.erase(_ItemClon.begin() + i);
+      }
+  }
   for (int i = 0; i < _food.size(); i++)
   {
     if (_player.getInterface()->getGlobalBounds().intersects(_food[i].getInterface()->getGlobalBounds()) && _food[i].getIsColliding() == false)
@@ -154,4 +189,22 @@ void GIEventSystem::playerVelocity(GIGameObject & _player)
   {
     _player.setVelocity(0.8f);
   }
+}
+
+void GIEventSystem::handleInputs(sf::Keyboard::Key key, bool isPressed, GIGameObject& _player){
+
+    if (key == sf::Mouse::Right && _player.getIsItemClon() == true  ) {
+
+        _player.setIsItemClon(false);
+        m_RightMouse = isPressed;
+        m_IsInstanciated = true;
+        m_tempInverse = _player.getPosition();
+    }
+}
+
+void GIEventSystem::Instance(GIGameObject& _player){
+
+    GIGameObject tempObject = _player;
+
+    m_Instances.push_back(tempObject);
 }

@@ -84,6 +84,10 @@ private:
    */
   bool m_isOnVortex = false;
   /**
+   * @brief 
+   */
+  bool m_isItemClon;//*@Author :Ramses
+  /**
    * Methods 
    */
 public:
@@ -202,6 +206,17 @@ public:
     * @bug    : No known bugs.
     */
   sf::CircleShape *& getInterface();
-  
+  /**
+    * @brief  : Function in charge of getting the circle shape ID.
+    * @bug    : No known bugs.
+    //*@Author :Ramses
+    */
+  void setIsItemClon(bool _itemClon);
+  /**
+    * @brief  : Function in charge of getting the circle shape ID.
+    * @bug    : No known bugs.
+    //*@Author :Ramses
+    */
+  bool & getIsItemClon();
 };
 
