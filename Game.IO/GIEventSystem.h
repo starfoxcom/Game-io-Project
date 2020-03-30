@@ -36,6 +36,18 @@ private:
    * @brief : 
    */
   float m_radius;
+
+  bool m_RightMouse = false;
+
+  vector<GIGameObject> m_Instances;
+
+  sf::Vector2f m_tempInverse;
+
+  bool m_IsInstanciated = false;
+
+  int m_vortexCDTimer; /**< Vortex cool down timer.*/
+
+  int m_vortexUsageTimer; /**< Vortex usage timer.*/
   /**
    * Methods 
    */
@@ -53,14 +65,14 @@ public:
     * @bug    : No known bugs.
     */
   void 
-  Update(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies);
+  Update(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies, vector<GIGameObject> & _vortex, vector<GIGameObject> & _clon);
   /**
     * @brief  : 
     * @param  : 
     * @bug    : No known bugs.
     */
   void 
-  Render();
+  Render(GIWindow& _window);
   /**
     * @brief  : 
     * @param  : 
@@ -77,7 +89,14 @@ public:
     * @bug    : no know bugs.
     */
   void 
-  playerRadius(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies);
+  playerRadius(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies, vector<GIGameObject> & _clon);
+
+  /**
+   * @brief	 :
+   * @param	 :
+   */
+  void
+  vortexRadius(GIGameObject & _player, vector<GIGameObject> & _vortex);
   /**
     * @brief  : 
     * @param  : 
@@ -85,6 +104,12 @@ public:
     */
   void 
   playerVelocity(GIGameObject & _player);
+
+  void 
+  handleInputs(sf::Keyboard::Key key, bool isPressed, GIGameObject& _player);
+
+  void
+  Instance(GIGameObject& _player);
 
 };
 

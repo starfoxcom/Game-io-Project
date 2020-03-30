@@ -87,5 +87,11 @@ private:
     * @bug    : 
     */
   sf::Vector2f Seek(sf::Vector2f & _object1, GIGameObject & _object2);
+  /**
+    * @brief  :
+    * @param  :
+    * @bug    :
+    */
+  sf::Vector2f Seek(sf::Vector2f & _object1, GIGameObject & _object2, float _velocity);
 };
 
