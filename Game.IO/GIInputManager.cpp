@@ -1,4 +1,6 @@
 #include "GIInputManager.h"
+#include "GIEventSystem.h"
+#include "GIGameObject.h"
 #include "GIWindow.h"
 #include "GICamera.h"
 
@@ -28,4 +30,19 @@ sf::Vector2f & GIInputManager::getWorldPosition(GIWindow & _window, GICamera & _
   sf::Vector2f worldPos = _window.getInterface()->mapPixelToCoords(mousePos, *_camera.getView());
 
   return  worldPos;
+}
+
+void GIInputManager::GetInput(sf::Event& _event, GIEventSystem& _eventSystem, GIGameObject& _player) {
+
+  switch (_event.type)
+  {
+  case sf::Event::MouseButtonPressed:
+    _eventSystem.handleInputs(_event.key.code, true, _player);
+    break;
+  case sf::Event::MouseButtonReleased:
+    _eventSystem.handleInputs(_event.key.code, false, _player);
+    break;
+  default:
+    break;
+  }
 }

@@ -80,6 +80,14 @@ private:
    */
   float m_velocity;
   /**
+   * @brief 
+   */
+  bool m_isOnVortex = false;
+  /**
+   * @brief 
+   */
+  bool m_isItemClon;//*@Author :Ramses
+  /**
    * Methods 
    */
 public:
@@ -160,7 +168,19 @@ public:
     * @param  : 
     * @bug    : 
     */
-  sf::Vector2f & getPosition();
+  bool & getIsOnVortex();
+  /**
+    * @brief  :
+    * @param  :
+    * @bug    :
+    */
+  void setIsOnVortex(bool _vortexState);
+  /**
+    * @brief  :
+    * @param  :
+    * @bug    :
+    */
+  const sf::Vector2f & getPosition();
   /**
     * @brief  : function in charge of getting the global bounds of the shape.
     * @bug    : Does not work, needs new implementation to get the method data.
@@ -186,6 +206,17 @@ public:
     * @bug    : No known bugs.
     */
   sf::CircleShape *& getInterface();
-  
+  /**
+    * @brief  : Function in charge of getting the circle shape ID.
+    * @bug    : No known bugs.
+    //*@Author :Ramses
+    */
+  void setIsItemClon(bool _itemClon);
+  /**
+    * @brief  : Function in charge of getting the circle shape ID.
+    * @bug    : No known bugs.
+    //*@Author :Ramses
+    */
+  bool & getIsItemClon();
 };
 
