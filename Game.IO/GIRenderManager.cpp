@@ -172,7 +172,6 @@ void GIRenderManager::Init()
   for (int i = 0; i < m_vortexVirus.size(); i++)
   {
 	  m_vortexVirus[i].Init(VortexDesc);
-	  m_virus[i].setPosition(sf::Vector2f(rand() % WindowDesc.Width + 1, rand() % WindowDesc.Height + 1));
 	  m_vortexVirus[i].setPosition(sf::Vector2f(rand() % (WindowDesc.Width * 4) + 1, rand() % (WindowDesc.Height * 4) + 1));
   }
 
@@ -203,7 +202,7 @@ void GIRenderManager::Update()
   // Update camera 
   m_Camera.Update();
   // Update Event system
-  m_EventSystem.Update(m_Player, m_food, m_virus);
+  m_EventSystem.Update(m_Player, m_food, m_virus, m_vortexVirus, m_ItemClon);
 
   // update the position of each element of the Gui.
   m_gui.update(*m_window.getInterface());

@@ -33,6 +33,8 @@ void GIEventSystem::Update(GIGameObject & _player, vector<GIGameObject> & _food,
       {
           m_Instances[i].Init(_player.getDescriptor());
       }
+
+      m_IsInstanciated = false;
       
   }
   
@@ -47,10 +49,10 @@ void GIEventSystem::Update(GIGameObject & _player, vector<GIGameObject> & _food,
 
 void GIEventSystem::Render(GIWindow& _window)
 {
- for (int i = 0; i < m_Instances.size(); i++) {
+  for (int i = 0; i < m_Instances.size(); i++) {
 
-        m_Instances[i].Render(_window);
-    }
+    m_Instances[i].Render(_window);
+  }
 }
 
 void GIEventSystem::Destroy()
