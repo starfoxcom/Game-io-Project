@@ -90,6 +90,13 @@ private:
    * @brief : 
    */
   float m_radius;
+
+  /**
+  * @brief : controls if the main menu is being 
+  * rendered.
+  */
+  bool m_isMainMenuPresent = true;
+
   /**
    * Methods 
    */

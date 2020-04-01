@@ -202,6 +202,7 @@ void GIEventSystem::handleInputs(sf::Keyboard::Key key, bool isPressed, GIGameOb
         m_IsInstanciated = true;
         m_tempInverse = _player.getPosition();
     }
+
 }
 
 void GIEventSystem::Instance(GIGameObject& _player){

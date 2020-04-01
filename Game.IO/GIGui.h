@@ -302,6 +302,8 @@ private:
   * @brief : used to know if we have a font loaded
   */
   bool m_hasFontLoaded = false;
+
+  bool is_pressenting = true;
 };
 
 
