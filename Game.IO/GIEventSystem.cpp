@@ -247,7 +247,7 @@ void GIEventSystem::dash(GIWindow& _window, sf::Event& AnyEvent, GIGameObject& P
              Player.CoolDown.restart();
          }
     }*/
-    if (spacePressed)
+    if (m_space)
     {
         Player.CanDash = true;
   

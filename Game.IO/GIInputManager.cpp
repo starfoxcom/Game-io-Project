@@ -43,10 +43,10 @@ void GIInputManager::GetInput(sf::Event& _event, GIEventSystem& _eventSystem, GI
     _eventSystem.handleInputs(_event.key.code, false, _player);
     break;
     case sf::Event::KeyPressed:
-            _eventSystem.handleInputs(_event.key.code, true);
+            _eventSystem.handleInputs(_event.key.code, true, _player);
             break;
         case sf::Event::KeyReleased:
-            _eventSystem.handleInputs(_event.key.code, false);
+            _eventSystem.handleInputs(_event.key.code, false, _player);
             break;
   default:
     break;
