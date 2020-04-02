@@ -55,7 +55,6 @@ private:
    */
   vector<GIGameObject> m_ItemClon;
   bool m_IsItemClon;
-  GIInputManager m_InputManager;
   /**
    * @brief : Food game object vector
    */
@@ -89,6 +88,7 @@ private:
   /**
    * @brief : 
    */
+  GIInputManager m_InputManager;
   float m_radius;
 
   /**
@@ -97,6 +97,12 @@ private:
   */
   bool m_isMainMenuPresent = true;
 
+  /**
+   * @brief : DeltaTime
+   */
+
+  sf::Clock ClockTime;
+  float deltaTime=0;
   /**
    * Methods 
    */

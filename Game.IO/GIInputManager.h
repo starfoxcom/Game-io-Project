@@ -11,6 +11,7 @@
  * @brief : 
  */
 #include "GIDefines.h"
+#include "GIGameObject.h"
 #include "GIModule.h"
 #pragma once
 /**
@@ -41,6 +42,7 @@ public:
   * @brief  : Function that initialize the module.
   * @bug    : No know bugs.
   */
+    sf::Keyboard Inputs;
   virtual void onPrepare() override {}
   /**
     * @brief  : Function in charge of release modules.
@@ -89,7 +91,11 @@ public:
     */
   sf::Vector2f & 
   getWorldPosition(GIWindow & _window, GICamera & _camera);
-
+  /**
+    * @brief  :
+    * @param  :
+    * @bug    :
+    */
   void
   GetInput(sf::Event& _event, GIEventSystem& _eventSystem, GIGameObject& _player);
 };

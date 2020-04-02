@@ -39,6 +39,8 @@ private:
 
   bool m_RightMouse = false;
 
+  bool m_space = false;
+
   vector<GIGameObject> m_Instances;
 
   sf::Vector2f m_tempInverse;
@@ -57,6 +59,7 @@ public:
     * @param  : 
     * @bug    : No known bugs.
     */
+    sf::Event event;
   void 
   Init(GIGameObject & _player);
   /**
@@ -65,7 +68,7 @@ public:
     * @bug    : No known bugs.
     */
   void 
-  Update(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies, vector<GIGameObject> & _vortex, vector<GIGameObject> & _clon);
+  Update(GIWindow& _window, GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies, vector<GIGameObject> & _vortex, vector<GIGameObject> & _clon);
   /**
     * @brief  : 
     * @param  : 
@@ -111,5 +114,7 @@ public:
   void
   Instance(GIGameObject& _player);
 
+  void
+  dash(GIWindow& _window, sf::Event& AnyEvent, GIGameObject& Player);
 };
 

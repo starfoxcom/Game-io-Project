@@ -42,6 +42,12 @@ void GIInputManager::GetInput(sf::Event& _event, GIEventSystem& _eventSystem, GI
   case sf::Event::MouseButtonReleased:
     _eventSystem.handleInputs(_event.key.code, false, _player);
     break;
+    case sf::Event::KeyPressed:
+            _eventSystem.handleInputs(_event.key.code, true);
+            break;
+        case sf::Event::KeyReleased:
+            _eventSystem.handleInputs(_event.key.code, false);
+            break;
   default:
     break;
   }

@@ -9,6 +9,8 @@ GIRenderManager::~GIRenderManager()
 
 void GIRenderManager::Init()
 {
+   // deltaTime = new float(0);
+    
   GIWindowDesc WindowDesc;
   WindowDesc.Width = 1200;
   WindowDesc.Height = 800;
@@ -22,6 +24,7 @@ void GIRenderManager::Init()
   GameObjectDesc.OutlineSize = 2;
   GameObjectDesc.OutlineColor = sf::Color::Transparent;
   GameObjectDesc.TextureName = "evil.png";
+  GameObjectDesc.DeltaTime = &deltaTime;
 
   GIGameObjectDesc SonDesc;
   SonDesc.Radius = 20.0f;
@@ -31,6 +34,7 @@ void GIRenderManager::Init()
   SonDesc.OutlineSize = 2;
   SonDesc.OutlineColor = sf::Color::Transparent;
   SonDesc.TextureName = "evil.png";
+  SonDesc.DeltaTime = &deltaTime;
 
   GIGameObjectDesc FoodDesc;
   FoodDesc.Radius = 8.0f;
@@ -183,16 +187,13 @@ void GIRenderManager::Init()
 
 void GIRenderManager::Update()
 {
+  ClockTime.restart();
   sf::Event event;
   while( m_window.getInterface()->pollEvent(event) )
   {
     if( event.type == sf::Event::Closed )
       m_window.getInterface()->close();
-
     m_InputManager.GetInput(event, m_EventSystem, m_Player);
-
-  
-
   }
 
   sf::Vector2f worldPos = GIInputManager::getSingleton().getWorldPosition(m_window, m_Camera);
@@ -273,6 +274,7 @@ void GIRenderManager::Render()
   }
 
   GIGraphic_API::getSingleton().Present(m_window);
+  deltaTime = ClockTime.getElapsedTime().asSeconds();
 }
 
 void GIRenderManager::Destroy()
@@ -286,6 +288,7 @@ void GIRenderManager::Destroy()
   }
 
   m_window.Destroy();
+  //delete deltaTime;
 }
 
 sf::RenderWindow*& GIRenderManager::getWindow()

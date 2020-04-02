@@ -10,6 +10,9 @@
 /**
  * Headers
  */
+
+#include<chrono>
+using namespace std::chrono_literals;
 #include "GIDefines.h"
 #include "GITexture.h"
 #pragma once
@@ -33,6 +36,7 @@ struct GIGameObjectDesc
   sf::Color OutlineColor;
   sf::Texture Tex;
   sf::Sprite sprite;
+  float* DeltaTime=nullptr;
 };
 /**
  * @brief : Temporal structure for different shapes (not tested)
@@ -156,6 +160,8 @@ public:
     * @param  : 
     * @bug    : 
     */
+  
+
   bool & getIsColliding();
   /**
     * @brief  : 
@@ -218,5 +224,15 @@ public:
     //*@Author :Ramses
     */
   bool & getIsItemClon();
+  float OriginaSpeed = m_velocity;
+  int Dashes = 0;
+  bool CanDash = true;
+  sf::Clock CoolDown;
+  sf::Clock DashTime;
+  float* m_deltaTime = nullptr;
+  float pos = 0.0f, prev_pos = 0.0f, org_pos = 0.0f;
+   float timestep = 0.080;
+   float lag = 0;
+  std::chrono::steady_clock::time_point  time_start=std::chrono::high_resolution_clock::now();
 };
 

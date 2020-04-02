@@ -2,6 +2,9 @@
 #include "GIGameObject.h"
 #include "GISteeringBehaviors.h"
 #include "GIWindow.h"
+#include"GIInputManager.h"
+#include <chrono>
+ 
 
 GIEventSystem::GIEventSystem()
 {
@@ -18,11 +21,12 @@ void GIEventSystem::Init(GIGameObject & _player)
   m_vortexUsageTimer = 0;
 }
 
-void GIEventSystem::Update(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies, vector<GIGameObject> & _vortex, vector<GIGameObject> & _ItemClon)
+void GIEventSystem::Update(GIWindow & _window, GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies, vector<GIGameObject> & _vortex, vector<GIGameObject> & _ItemClon)
 {
   playerRadius(_player, _food, _enemies, _ItemClon);
   vortexRadius(_player, _vortex);
   playerVelocity(_player);
+  dash(_window,event, _player);
 
   //Checamos si el jugador hizo click derecho y aparte si tiene el item de clon
   if (m_IsInstanciated) {
@@ -203,6 +207,10 @@ void GIEventSystem::handleInputs(sf::Keyboard::Key key, bool isPressed, GIGameOb
         m_tempInverse = _player.getPosition();
     }
 
+    if (key == sf::Keyboard::Space) {
+          m_space = isPressed;
+    }
+
 }
 
 void GIEventSystem::Instance(GIGameObject& _player){
@@ -210,4 +218,61 @@ void GIEventSystem::Instance(GIGameObject& _player){
     GIGameObject tempObject = _player;
 
     m_Instances.push_back(tempObject);
+}
+
+void GIEventSystem::dash(GIWindow& _window, sf::Event& AnyEvent, GIGameObject& Player)
+{
+
+    GIInputManager Temp;
+    /*while (_window.getInterface()->pollEvent(event))
+    {
+
+            if (AnyEvent.key.code == Temp.Inputs.Space)
+            {
+
+                Player.setVelocity(Player.getVelocity() += 18);
+                Player.setRadius(Player.getRadius() -= 5);
+                Player.CanDash = false;
+            }
+
+            std::cout << "Dash" << std::endl;
+
+            Player.Dashes += 1;
+
+         ElapsedTime = Player.CoolDown.getElapsedTime();
+
+         if (ElapsedTime.asSeconds() > 0.25)
+         {
+             Player.CanDash = true;
+             Player.CoolDown.restart();
+         }
+    }*/
+    if (spacePressed)
+    {
+        Player.CanDash = true;
+  
+        
+    }
+    if (Player.CanDash)
+    {
+        Player.setVelocity(Player.getVelocity() += *Player.m_deltaTime * 50 * Player.getRadius());
+        //Player.setRadius(Player.getRadius() -= 5);
+        Player.CanDash = false;
+        std::cout << "Dashing" << std::endl;
+        std::cout << *Player.m_deltaTime;
+    }
+
+    if (!Player.CanDash)
+    {
+
+        int timer = Player.CoolDown.getElapsedTime().asSeconds();
+        if (timer >= 2)
+        {
+            Player.CanDash = true;
+            Player.CoolDown.restart();
+            std::cout << "Dash" << std::endl;
+            Player.Dashes += 1;
+        }
+
+    }
 }
