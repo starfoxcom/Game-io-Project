@@ -1,6 +1,9 @@
 #include "GIEventSystem.h"
 #include "GIGameObject.h"
 #include "GIWindow.h"
+#include"GIInputManager.h"
+#include <chrono>
+ 
 
 GIEventSystem::GIEventSystem()
 {
@@ -16,10 +19,11 @@ void GIEventSystem::Init(GIGameObject & _player)
   m_radius = _player.getDescriptor().Radius;
 }
 
-void GIEventSystem::Update(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies)
+void GIEventSystem::Update(GIWindow & _window,  GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies)
 {
   playerRadius(_player, _food, _enemies);
   playerVelocity(_player);
+  dash(_window,event, _player);
 }
 
 void GIEventSystem::Render()
@@ -90,4 +94,68 @@ void GIEventSystem::playerVelocity(GIGameObject & _player)
   {
     _player.setVelocity(0.8f);
   }
+}
+
+void GIEventSystem::dash(GIWindow& _window, sf::Event& AnyEvent, GIGameObject& Player)
+{
+
+    GIInputManager Temp;
+    /*while (_window.getInterface()->pollEvent(event))
+    {
+
+            if (AnyEvent.key.code == Temp.Inputs.Space)
+            {
+
+                Player.setVelocity(Player.getVelocity() += 18);
+                Player.setRadius(Player.getRadius() -= 5);
+                Player.CanDash = false;
+            }
+
+            std::cout << "Dash" << std::endl;
+
+            Player.Dashes += 1;
+
+         ElapsedTime = Player.CoolDown.getElapsedTime();
+
+         if (ElapsedTime.asSeconds() > 0.25)
+         {
+             Player.CanDash = true;
+             Player.CoolDown.restart();
+         }
+    }*/
+    if (spacePressed)
+    {
+        Player.CanDash = true;
+  
+        
+    }
+    if (Player.CanDash)
+    {
+        Player.setVelocity(Player.getVelocity() += *Player.m_deltaTime * 50 * Player.getRadius());
+        //Player.setRadius(Player.getRadius() -= 5);
+        Player.CanDash = false;
+        std::cout << "Dashing" << std::endl;
+        std::cout << *Player.m_deltaTime;
+    }
+
+    if (!Player.CanDash)
+    {
+
+        int timer = Player.CoolDown.getElapsedTime().asSeconds();
+        if (timer >= 2)
+        {
+            Player.CanDash = true;
+            Player.CoolDown.restart();
+            std::cout << "Dash" << std::endl;
+            Player.Dashes += 1;
+        }
+
+    }
+}
+
+void GIEventSystem::handleInputs(sf::Keyboard::Key key, bool isPressed)
+{
+    if (key == sf::Keyboard::Space) {
+          spacePressed = isPressed;
+    }
 }

@@ -1,6 +1,7 @@
 #include "GIInputManager.h"
 #include "GIWindow.h"
 #include "GICamera.h"
+#include "GIEventSystem.h"
 
 GIInputManager::GIInputManager()
 {
@@ -29,3 +30,24 @@ sf::Vector2f & GIInputManager::getWorldPosition(GIWindow & _window, GICamera & _
 
   return  worldPos;
 }
+
+void GIInputManager::GetInput(sf::Event& _event, GIEventSystem& _eventSystem)
+{
+    //sf::Event _event;
+    //while (_window.getInterface()->pollEvent(_event))
+    //{
+        switch (_event.type)
+        {
+        case sf::Event::KeyPressed:
+            _eventSystem.handleInputs(_event.key.code, true);
+            break;
+        case sf::Event::KeyReleased:
+            _eventSystem.handleInputs(_event.key.code, false);
+            break;
+        default:
+            break;
+        }
+    //}
+}
+
+

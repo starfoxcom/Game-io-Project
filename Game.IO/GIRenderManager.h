@@ -70,7 +70,14 @@ private:
   /**
    * @brief : 
    */
+  GIInputManager m_InputManager;
   float m_radius;
+  /**
+   * @brief : DeltaTime
+   */
+
+  sf::Clock ClockTime;
+  float deltaTime=0;
   /**
    * Methods 
    */

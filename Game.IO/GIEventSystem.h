@@ -45,6 +45,7 @@ public:
     * @param  : 
     * @bug    : No known bugs.
     */
+    sf::Event event;
   void 
   Init(GIGameObject & _player);
   /**
@@ -53,7 +54,7 @@ public:
     * @bug    : No known bugs.
     */
   void 
-  Update(GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies);
+  Update(GIWindow& _window,GIGameObject & _player, vector<GIGameObject> & _food, vector<GIGameObject> & _enemies);
   /**
     * @brief  : 
     * @param  : 
@@ -86,5 +87,10 @@ public:
   void 
   playerVelocity(GIGameObject & _player);
 
+  void
+  dash(GIWindow& _window, sf::Event& AnyEvent, GIGameObject& Player);
+
+  void handleInputs(sf::Keyboard::Key key, bool isPressed);
+  bool spacePressed = false;
 };
 

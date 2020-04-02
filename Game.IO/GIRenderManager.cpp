@@ -13,6 +13,8 @@ GIRenderManager::~GIRenderManager()
 
 void GIRenderManager::Init()
 {
+   // deltaTime = new float(0);
+    
   GIWindowDesc WindowDesc;
   WindowDesc.Width = 1200;
   WindowDesc.Height = 800;
@@ -26,6 +28,7 @@ void GIRenderManager::Init()
   GameObjectDesc.OutlineSize = 2;
   GameObjectDesc.OutlineColor = sf::Color::Transparent;
   GameObjectDesc.TextureName = "evil.png";
+  GameObjectDesc.DeltaTime = &deltaTime;
 
   GIGameObjectDesc SonDesc;
   SonDesc.Radius = 20.0f;
@@ -35,6 +38,7 @@ void GIRenderManager::Init()
   SonDesc.OutlineSize = 2;
   SonDesc.OutlineColor = sf::Color::Transparent;
   SonDesc.TextureName = "evil.png";
+  SonDesc.DeltaTime = &deltaTime;
 
   GIGameObjectDesc FoodDesc;
   FoodDesc.Radius = 8.0f;
@@ -101,15 +105,17 @@ void GIRenderManager::Init()
 
 void GIRenderManager::Update()
 {
+  ClockTime.restart();
   sf::Event event;
   while (m_window.getInterface()->pollEvent(event))
   {
     if (event.type == sf::Event::Closed)
       m_window.getInterface()->close();
+    m_InputManager.GetInput(event, m_EventSystem);
+
   }
 
   sf::Vector2f worldPos = GIInputManager::getSingleton().getWorldPosition(m_window, m_Camera);
-  
   m_Player.Update(GISteeringBehaviors::getSingleton().Seek(worldPos, m_Player)); // This function is part of graphics API
   //m_Player.Update(worldPos); // This function is part of graphics API
   m_son.Update(GISteeringBehaviors::getSingleton().Seek(worldPos , m_son));
@@ -119,7 +125,7 @@ void GIRenderManager::Update()
   // Update camera 
   m_Camera.Update();
   // Update Event system
-  m_EventSystem.Update(m_Player, m_food, m_virus);
+  m_EventSystem.Update(m_window,m_Player, m_food, m_virus);
 }
 
 void GIRenderManager::Render()
@@ -143,6 +149,7 @@ void GIRenderManager::Render()
   m_Camera.Render(m_window);
 
   GIGraphic_API::getSingleton().Present(m_window);
+  deltaTime = ClockTime.getElapsedTime().asSeconds();
 }
 
 void GIRenderManager::Destroy()
@@ -156,6 +163,7 @@ void GIRenderManager::Destroy()
   }
 
   m_window.Destroy();
+  //delete deltaTime;
 }
 
 sf::RenderWindow *& GIRenderManager::getWindow()

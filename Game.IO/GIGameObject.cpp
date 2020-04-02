@@ -37,6 +37,7 @@ void GIGameObject::Init(GIGameObjectDesc _desc)
   m_Mesh->setPosition(m_descriptor.Position);
   m_Mesh->setOrigin(m_descriptor.Origin);
   m_velocity = _desc.Velocity;
+  m_deltaTime = _desc.DeltaTime;
 }
 
 void GIGameObject::Update(sf::Vector2f _position)// Transform
